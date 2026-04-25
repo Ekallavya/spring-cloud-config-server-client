@@ -1,0 +1,20 @@
+#ensure spring-cloud-config-server-demo application is running on port 8888 ,before starting the config client application
+since the config client application will try to fetch the configuration properties from the config server application, it is important to start the config server application first and ensure it is running on port 8888 before starting the config client application.
+    ensure the following property is set in the config client application's application.properties file to point to the config server:
+    spring.cloud.config.uri=http://localhost:8888
+
+#ensure configured  spring.cloud.config.server.git.uri is available and required properties files are in place before running the config server for all the environments
+    ex: https://github.com/Ekallavya/spring-boot-global-data-config.git
+
+
+ # maven clean install the config client application to ensure all dependencies are resolved and the application is built successfully before running it.
+    mvn clean install
+# run the config client application using the command line or an IDE, ensuring that it is able to connect to the config server and fetch the required configuration properties successfully.
+    java -jar target/spring-cloud-config-client-demo.jar
+
+ ## Postman testing
+
+  http://localhost:8080/api/limits/greeting
+
+  output:
+    Message :limits-service ,This is from config server - QA profile MaxLimit : 300 and MinLimit : 30
